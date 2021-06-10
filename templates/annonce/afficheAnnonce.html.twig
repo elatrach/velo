@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}recherche annonce{% endblock %}
+
+{% block body %}
+<div class="container">
+	<div class="row">
+		{% for v in velo %}
+		<div class="col-3">
+			{{v.titreAnnonce}}
+			<br/>
+			{% for photo in v.idPhoto %}
+			{% if loop.first %}
+				<img src="{{photo.filenamePhoto}}" style="object-fit:fill;
+            width:200px;
+            height:200px;
+            border: solid 1px #CCC">
+            {% endif %}
+			{% endfor %}
+			<br/>
+			{{v.prixAnnonce}} €
+			<br/>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#annonce{{v.idAnnonce}}">
+  				Voir l'annonce
+			</button>
+		</div>
+		<div class="modal fade" id="annonce{{v.idAnnonce}}" tabindex="-1" role="dialog" aria-labelledby="annonceModalTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+    			<div class="modal-content">
+      				<div class="modal-header">
+        				<h5 class="modal-title" id="modalTitle">{{v.titreAnnonce}}</h5>
+        				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          					<span aria-hidden="true">&times;</span>
+        				</button>
+      				</div>
+    				<div class="modal-body">
+    					Annonce postée par {{v.idUtilisateur.nomUtilisateur}} {{v.idUtilisateur.prenomUtilisateur}}
+    					<br/>
+    					{% for photo in v.idPhoto %}
+						<img src="{{photo.filenamePhoto}}" style="object-fit:fill;
+            			width:200px;
+            			height:200px;
+            			border: solid 1px #CCC">
+						{% endfor %}
+    					<br/>
+      					Public : {{v.idPublic}}
+      					<br/>
+      					Catégorie : {{v.idCategorie}}
+      					<br/>
+      					Taille : {{v.idTaille}}
+      					<br/>
+      					Description :
+      					<br/>
+      					{{v.descriptionAnnonce}}
+      					<br/>
+      					Prix : {{v.prixAnnonce}} €
+      					<br/>
+      					Annonce postée le {{v.dateCreationAnnonce}}
+                <br/>
+                {% for date in v.idIndisponible %}
+                {{date.dateIndisponibilite}}
+                {% endfor %}
+                <br/>
+      				</div>
+      				<div class="modal-footer">
+        				<a class='btn btn-success' href="{{path('home',{'id':v.idAnnonce})}}">Réserver ce vélo</a>
+        				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      				</div>
+    			</div>
+  			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+
+
+
+
+{% endblock %}

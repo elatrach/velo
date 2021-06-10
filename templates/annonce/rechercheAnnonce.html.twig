@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AnnonceController!{% endblock %}
+
+{% block body %}
+
+<h1>Recherche Annonce</h1>
+<div class="row">
+	<div class="col-3">
+		{{form_start(form)}}
+
+		{{form_label(form.idCategorie,'Catégorie')}}
+		{{form_widget(form.idCategorie)}}
+
+		{{form_label(form.idPublic,'Public')}}
+		{{form_widget(form.idPublic)}}
+
+		{{form_label(form.idTaille,'Taille')}}
+		{{form_widget(form.idTaille)}}
+		
+		<!--{{form_label(form.prixAnnonce,'Prix')}}
+		{{form_widget(form.prixAnnonce)}}-->
+		<br/>
+		<p><input type="submit" value="Rechercher" class="btn btn-success"></p>
+
+		{{form_end(form)}}
+
+
+	</div>
+</div>
+{% endblock %}
