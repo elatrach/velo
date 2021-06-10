@@ -1,0 +1,12 @@
+git clone 
+composer install
+php bin/console migrate    
+
+Avant de commencer à travailler:
+git pull
+
+Après avoir codé:
+git pull
+git add .
+git commit -m "message"
+git push
