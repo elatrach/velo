@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Annonce
  *
- * @ORM\Table(name="annonce", indexes={@ORM\Index(name="fk_annonce_public1_idx", columns={"id_cible"}), @ORM\Index(name="fk_annonce_categorie1_idx", columns={"id_categorie"}), @ORM\Index(name="fk_annonce_taille1_idx", columns={"id_taille"}), @ORM\Index(name="fk_annonce_utilisateur2_idx", columns={"id_utilisateur"})})
+ * @ORM\Table(name="annonce", indexes={@ORM\Index(name="fk_annonce_taille1_idx", columns={"id_taille"}), @ORM\Index(name="fk_annonce_utilisateur2_idx", columns={"id_utilisateur"}), @ORM\Index(name="fk_annonce_public1_idx", columns={"id_cible"}), @ORM\Index(name="fk_annonce_categorie1_idx", columns={"id_categorie"})})
  * @ORM\Entity(repositoryClass="App\Repository\AnnonceRepository")
  */
 class Annonce
@@ -59,26 +59,6 @@ class Annonce
     private $flagAfficheAnnonce;
 
     /**
-     * @var \Categorie
-     *
-     * @ORM\ManyToOne(targetEntity="Categorie")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_categorie", referencedColumnName="id_categorie")
-     * })
-     */
-    private $idCategorie;
-
-    /**
-     * @var \Cible
-     *
-     * @ORM\ManyToOne(targetEntity="Cible")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_cible", referencedColumnName="id_cible")
-     * })
-     */
-    private $idCible;
-
-    /**
      * @var \Taille
      *
      * @ORM\ManyToOne(targetEntity="Taille")
@@ -99,6 +79,26 @@ class Annonce
     private $idUtilisateur;
 
     /**
+     * @var \Categorie
+     *
+     * @ORM\ManyToOne(targetEntity="Categorie")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_categorie", referencedColumnName="id_categorie")
+     * })
+     */
+    private $idCategorie;
+
+    /**
+     * @var \Cible
+     *
+     * @ORM\ManyToOne(targetEntity="Cible")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cible", referencedColumnName="id_cible")
+     * })
+     */
+    private $idCible;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="Accessoire", inversedBy="idAnnonce")
@@ -116,6 +116,21 @@ class Annonce
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
+     * @ORM\ManyToMany(targetEntity="CalendrierIndisponibilite", inversedBy="idAnnonce")
+     * @ORM\JoinTable(name="annonce_has_indisponibilite",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="id_annonce", referencedColumnName="id_annonce")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="id_indisponible", referencedColumnName="id_indisponible")
+     *   }
+     * )
+     */
+    private $idIndisponible;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
      * @ORM\ManyToMany(targetEntity="Photo", mappedBy="idAnnonce")
      */
     private $idPhoto;
@@ -126,6 +141,7 @@ class Annonce
     public function __construct()
     {
         $this->idAccessoire = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idIndisponible = new \Doctrine\Common\Collections\ArrayCollection();
         $this->idPhoto = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -194,30 +210,6 @@ class Annonce
         return $this;
     }
 
-    public function getIdCategorie(): ?Categorie
-    {
-        return $this->idCategorie;
-    }
-
-    public function setIdCategorie(?Categorie $idCategorie): self
-    {
-        $this->idCategorie = $idCategorie;
-
-        return $this;
-    }
-
-    public function getIdCible(): ?Cible
-    {
-        return $this->idCible;
-    }
-
-    public function setIdCible(?Cible $idCible): self
-    {
-        $this->idCible = $idCible;
-
-        return $this;
-    }
-
     public function getIdTaille(): ?Taille
     {
         return $this->idTaille;
@@ -242,6 +234,30 @@ class Annonce
         return $this;
     }
 
+    public function getIdCategorie(): ?Categorie
+    {
+        return $this->idCategorie;
+    }
+
+    public function setIdCategorie(?Categorie $idCategorie): self
+    {
+        $this->idCategorie = $idCategorie;
+
+        return $this;
+    }
+
+    public function getIdCible(): ?Cible
+    {
+        return $this->idCible;
+    }
+
+    public function setIdCible(?Cible $idCible): self
+    {
+        $this->idCible = $idCible;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Accessoire[]
      */
@@ -262,6 +278,30 @@ class Annonce
     public function removeIdAccessoire(Accessoire $idAccessoire): self
     {
         $this->idAccessoire->removeElement($idAccessoire);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CalendrierIndisponibilite[]
+     */
+    public function getIdIndisponible(): Collection
+    {
+        return $this->idIndisponible;
+    }
+
+    public function addIdIndisponible(CalendrierIndisponibilite $idIndisponible): self
+    {
+        if (!$this->idIndisponible->contains($idIndisponible)) {
+            $this->idIndisponible[] = $idIndisponible;
+        }
+
+        return $this;
+    }
+
+    public function removeIdIndisponible(CalendrierIndisponibilite $idIndisponible): self
+    {
+        $this->idIndisponible->removeElement($idIndisponible);
 
         return $this;
     }

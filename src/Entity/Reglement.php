@@ -50,16 +50,6 @@ class Reglement
     private $commissionReglement;
 
     /**
-     * @var \MoyenPaiement
-     *
-     * @ORM\ManyToOne(targetEntity="MoyenPaiement")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_moyen_paiement", referencedColumnName="id_moyen_paiement")
-     * })
-     */
-    private $idMoyenPaiement;
-
-    /**
      * @var \Reservation
      *
      * @ORM\ManyToOne(targetEntity="Reservation")
@@ -68,6 +58,16 @@ class Reglement
      * })
      */
     private $idReservation;
+
+    /**
+     * @var \MoyenPaiement
+     *
+     * @ORM\ManyToOne(targetEntity="MoyenPaiement")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_moyen_paiement", referencedColumnName="id_moyen_paiement")
+     * })
+     */
+    private $idMoyenPaiement;
 
     public function getIdReglement(): ?int
     {
@@ -122,18 +122,6 @@ class Reglement
         return $this;
     }
 
-    public function getIdMoyenPaiement(): ?MoyenPaiement
-    {
-        return $this->idMoyenPaiement;
-    }
-
-    public function setIdMoyenPaiement(?MoyenPaiement $idMoyenPaiement): self
-    {
-        $this->idMoyenPaiement = $idMoyenPaiement;
-
-        return $this;
-    }
-
     public function getIdReservation(): ?Reservation
     {
         return $this->idReservation;
@@ -142,6 +130,18 @@ class Reglement
     public function setIdReservation(?Reservation $idReservation): self
     {
         $this->idReservation = $idReservation;
+
+        return $this;
+    }
+
+    public function getIdMoyenPaiement(): ?MoyenPaiement
+    {
+        return $this->idMoyenPaiement;
+    }
+
+    public function setIdMoyenPaiement(?MoyenPaiement $idMoyenPaiement): self
+    {
+        $this->idMoyenPaiement = $idMoyenPaiement;
 
         return $this;
     }

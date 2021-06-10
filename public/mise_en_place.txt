@@ -1,4 +1,4 @@
-git clone 
+git clone https://github.com/elatrach/velo.git
 composer install
 php bin/console migrate    
 

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,8 +41,8 @@ class Reservation
      * @var string|null
      *
      * @ORM\Column(name="statut_reservation", type="string", length=2, nullable=true, options={"comment"="OK=reservation confirmé
-KO=reservation annulé
-EC=en cours"})
+        KO=reservation annulé
+        EC=en cours"})
      */
     private $statutReservation;
 
@@ -63,6 +65,21 @@ EC=en cours"})
      * })
      */
     private $idUtilisateur;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="CalendrierReservation", mappedBy="idReservation")
+     */
+    private $idCalendrierReservation;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->idCalendrierReservation = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     public function getIdReservation(): ?int
     {
@@ -129,5 +146,31 @@ EC=en cours"})
         return $this;
     }
 
+    /**
+     * @return Collection|CalendrierReservation[]
+     */
+    public function getIdCalendrierReservation(): Collection
+    {
+        return $this->idCalendrierReservation;
+    }
+
+    public function addIdCalendrierReservation(CalendrierReservation $idCalendrierReservation): self
+    {
+        if (!$this->idCalendrierReservation->contains($idCalendrierReservation)) {
+            $this->idCalendrierReservation[] = $idCalendrierReservation;
+            $idCalendrierReservation->addIdReservation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdCalendrierReservation(CalendrierReservation $idCalendrierReservation): self
+    {
+        if ($this->idCalendrierReservation->removeElement($idCalendrierReservation)) {
+            $idCalendrierReservation->removeIdReservation($this);
+        }
+
+        return $this;
+    }
 
 }
