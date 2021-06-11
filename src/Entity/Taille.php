@@ -45,5 +45,10 @@ class Taille
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->libelleTaille;
+    }
+
 
 }

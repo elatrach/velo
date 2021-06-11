@@ -93,7 +93,7 @@ class Annonce
      *
      * @ORM\ManyToOne(targetEntity="Cible")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_cible", referencedColumnName="id_cible")
+     *   @ORM\JoinColumn(name="id_public", referencedColumnName="id_public")
      * })
      */
     private $idCible;
@@ -186,9 +186,9 @@ class Annonce
         return $this;
     }
 
-    public function getDateCreationAnnonce(): ?\DateTimeInterface
+    public function getDateCreationAnnonce(): ?string
     {
-        return $this->dateCreationAnnonce;
+        return $this->dateCreationAnnonce->format("Y-m-d");
     }
 
     public function setDateCreationAnnonce(?\DateTimeInterface $dateCreationAnnonce): self

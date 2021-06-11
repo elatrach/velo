@@ -26,9 +26,9 @@ class CalendrierIndisponibilite
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="date_indisponibilte", type="datetime", nullable=true)
+     * @ORM\Column(name="date_indisponibilite", type="datetime", nullable=true)
      */
-    private $dateIndisponibilte;
+    private $dateIndisponibilite;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -50,14 +50,14 @@ class CalendrierIndisponibilite
         return $this->idIndisponible;
     }
 
-    public function getDateIndisponibilte(): ?\DateTimeInterface
+    public function getDateIndisponibilite(): ?string
     {
-        return $this->dateIndisponibilte;
+        return $this->dateIndisponibilite->format("Y-m-d");
     }
 
-    public function setDateIndisponibilte(?\DateTimeInterface $dateIndisponibilte): self
+    public function setDateIndisponibilite(?\DateTimeInterface $dateIndisponibilite): self
     {
-        $this->dateIndisponibilte = $dateIndisponibilte;
+        $this->dateIndisponibilite = $dateIndisponibilite;
 
         return $this;
     }

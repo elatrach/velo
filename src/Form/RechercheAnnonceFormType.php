@@ -12,10 +12,12 @@ class RechercheAnnonceFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+
             ->add('prixAnnonce')
-            ->add('idCategorie')
-            ->add('idPublic')
             ->add('idTaille')
+            ->add('idCategorie')
+            ->add('idCible')
+
         ;
     }
 
@@ -25,6 +27,4 @@ class RechercheAnnonceFormType extends AbstractType
             'data_class' => Annonce::class,
         ]);
     }
-
-    
 }
