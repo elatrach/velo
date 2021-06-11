@@ -28,12 +28,12 @@ class AnnonceController extends AbstractController
         	$data=$request->request->all();
         	unset($data['recherche_annonce_form']['_token']);
             $velo=$annonceRepo->findBy($data['recherche_annonce_form']);
-            $dateReservation=array();
             $idData=array();
             foreach ($velo as $v)
             {
                 array_push($idData, $v->getIdAnnonce());
             }
+            $dateReservation=array();
             foreach($idData as $id)
             {
                 array_push($dateReservation,$reservationRepo->findBy(["idAnnonce"=>$id]));
