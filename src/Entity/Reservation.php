@@ -24,20 +24,6 @@ class Reservation
     private $idReservation;
 
     /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="date_debut_reservation", type="datetime", nullable=true)
-     */
-    private $dateDebutReservation;
-
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="date_fin_reservation", type="datetime", nullable=true)
-     */
-    private $dateFinReservation;
-
-    /**
      * @var string|null
      *
      * @ORM\Column(name="statut_reservation", type="string", length=2, nullable=true, options={"comment"="OK=reservation confirmé
@@ -86,29 +72,6 @@ class Reservation
         return $this->idReservation;
     }
 
-    public function getDateDebutReservation(): ?\DateTimeInterface
-    {
-        return $this->dateDebutReservation;
-    }
-
-    public function setDateDebutReservation(?\DateTimeInterface $dateDebutReservation): self
-    {
-        $this->dateDebutReservation = $dateDebutReservation;
-
-        return $this;
-    }
-
-    public function getDateFinReservation(): ?\DateTimeInterface
-    {
-        return $this->dateFinReservation;
-    }
-
-    public function setDateFinReservation(?\DateTimeInterface $dateFinReservation): self
-    {
-        $this->dateFinReservation = $dateFinReservation;
-
-        return $this;
-    }
 
     public function getStatutReservation(): ?string
     {

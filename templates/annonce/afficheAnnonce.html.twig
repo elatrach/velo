@@ -5,7 +5,7 @@
 {% block body %}
 <div class="container">
 	<div class="row">
-		{% for v in velo %}
+    {% for v in velo %}
 		<div class="col-3">
 			{{v.titreAnnonce}}
 			<br/>
@@ -57,10 +57,19 @@
       					<br/>
       					Annonce postée le {{v.dateCreationAnnonce}}
                 <br/>
+                Date Indisponibilité : 
                 {% for date in v.idIndisponible %}
                 {{date.dateIndisponibilite}}
                 {% endfor %}
                 <br/>
+                Date Réservé : 
+                {% for liste in date %}
+                {% for objet in liste %}
+                {% for d in objet.idCalendrierReservation %}
+                {{d.dateReservation}}
+                {% endfor %}
+                {% endfor %}
+                {% endfor %}
       				</div>
       				<div class="modal-footer">
         				<a class='btn btn-success' href="{{path('home',{'id':v.idAnnonce})}}">Réserver ce vélo</a>

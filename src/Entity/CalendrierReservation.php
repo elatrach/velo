@@ -58,9 +58,9 @@ class CalendrierReservation
         return $this->idCalendrierReservation;
     }
 
-    public function getDateReservation(): ?\DateTimeInterface
+    public function getDateReservation(): ?string
     {
-        return $this->dateReservation;
+        return $this->dateReservation->format("Y-m-d");
     }
 
     public function setDateReservation(?\DateTimeInterface $dateReservation): self
@@ -93,5 +93,7 @@ class CalendrierReservation
 
         return $this;
     }
+
+
 
 }
