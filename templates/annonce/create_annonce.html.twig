@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Poster mon annonce</h1>
+<div class="row">
+	<div class="col-3">
+		{{form_start(form)}}
+
+		{{form_label(form.titreAnnonce,"Titre de l'annonce")}}
+		{{form_widget(form.titreAnnonce)}}
+
+		{{form_label(form.descriptionAnnonce,"Description de l'annonce")}}
+		{{form_widget(form.descriptionAnnonce)}}
+
+		{{form_label(form.prixAnnonce,"Prix")}}
+		{{form_widget(form.prixAnnonce)}}
+
+		{{form_label(form.idTaille,"Taille du vélo")}}
+		{{form_widget(form.idTaille)}}
+
+		{{form_label(form.idCategorie,"Catégorie du vélo")}}
+		{{form_widget(form.idCategorie)}}
+
+		{{form_label(form.idCible,"Public du vélo")}}
+		{{form_widget(form.idCible)}}
+
+		{{form_label(form.idAccessoire,"Accessoire du vélo")}}
+		{{form_widget(form.idAccessoire)}}
+
+		{{form_label(form.idPhoto,"Photo")}}
+		{{form_widget(form.idPhoto)}}
+
+		{{form_label(form.idUtilisateur,"ID Utilisateur")}}
+		{{form_widget(form.idUtilisateur)}}
+
+		<p><input type="submit" value="Suivant" class="btn btn-success"></p>
+
+		{{form_end(form)}}
+
+	</div>
+</div>
+
+
+
+{% endblock %}

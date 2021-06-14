@@ -52,7 +52,7 @@ class Annonce
     private $dateCreationAnnonce;
 
     /**
-     * @var bool|null
+     * @var bool|1
      *
      * @ORM\Column(name="flag_affiche_annonce", type="boolean", nullable=true)
      */
@@ -145,7 +145,7 @@ class Annonce
         $this->idPhoto = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    public function getIdAnnonce(): ?int
+    public function getIdAnnonce(): ?string
     {
         return $this->idAnnonce;
     }
@@ -331,6 +331,11 @@ class Annonce
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->idAnnonce;
     }
 
 }

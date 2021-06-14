@@ -1,10 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}recherche annonce{% endblock %}
+{% block javascripts %}
+<script type="text/javascript">
+    function validateDate() 
+    {
+        var x = new Date(document.forms["form"]["date_debut"].value);
+        var y = new Date(document.forms["form"]["date_fin"].value);
+        if (x.getTime()>=y.getTime()) 
+        {
+          alert("Sélectionner une date correct");
+          return false;
+      }
+    }
+</script>
+{% endblock %}
 
 {% block body %}
 <div class="container">
 	<div class="row">
+    {{data|json_encode()}}
     {% for v in velo %}
 		<div class="col-3">
 			{{v.titreAnnonce}}
@@ -80,33 +95,72 @@
       					<br/>
       					Annonce postée le {{v.dateCreationAnnonce}}
                 <br/>
-                Date Indisponibilité : 
-                {% for date in v.idIndisponible %}
-                {{date.dateIndisponibilite}}
+                <hr>
+                <div class="row">
+                <div class="col-6">
+                <form method="POST" action="{{path('home',{'id':v.idAnnonce})}}" onsubmit="return validateDate()" name="form">
+                Date de début de Réservation
+                <select name="date_debut">
+                {% for i in 0..30 %}
+                  {% for liste in date %}
+                    {% for objet in liste %}
+                      {% if objet.idAnnonce ==(v.idAnnonce) %}
+                        {% for d in objet.idCalendrierReservation %}
+                          {% if d.dateReservation is same as("now"|date_modify('+'~i~'day')|date('Y-m-d')) %}
+                            <option disabled>{{"now"|date_modify('+'~i~'day')|date('Y-m-d')}}</option>
+                          {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endfor %}
+                  {% for dates in v.idIndisponible %}
+                    {% if dates.dateIndisponibilite is same as("now"|date_modify('+'~i~'day')|date('Y-m-d')) %}
+                      <option disabled>{{"now"|date_modify('+'~i~'day')|date('Y-m-d')}}</option>
+                    {% else %}
+                      <option>{{"now"|date_modify('+'~i~'day')|date('Y-m-d')}}</option>
+                    {% endif %}
+                  {% endfor %}
                 {% endfor %}
-                <br/>
-                Date Réservé : 
-                {% for liste in date %}
-                {% for objet in liste %}
-                {{objet.idReservation}}
-                {% for d in objet.idCalendrierReservation %}
-                {{d.dateReservation}}
+                </select>
+              </div>
+              <div class="col-6">
+              Date de fin de Réservation
+              <select name="date_fin">
+                {% for i in 0..30 %}
+                  {% for liste in date %}
+                    {% for objet in liste %}
+                      {% if objet.idAnnonce ==(v.idAnnonce) %}
+                        {% for d in objet.idCalendrierReservation %}
+                          {% if d.dateReservation is same as("now"|date_modify('+'~i~'day')|date('Y-m-d')) %}
+                            <option disabled>{{"now"|date_modify('+'~i~'day')|date('Y-m-d')}}</option>
+                          {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endfor %}
+                  {% for dates in v.idIndisponible %}
+                    {% if dates.dateIndisponibilite is same as("now"|date_modify('+'~i~'day')|date('Y-m-d')) %}
+                      <option disabled>{{"now"|date_modify('+'~i~'day')|date('Y-m-d')}}</option>
+                    {% else %}
+                      <option>{{"now"|date_modify('+'~i~'day')|date('Y-m-d')}}</option>
+                    {% endif %}
+                  {% endfor %}
                 {% endfor %}
-                {% endfor %}
-                {% endfor %}
+                </select>
+              </div>
       				</div>
+              </div>  
       				<div class="modal-footer">
-        				<a class='btn btn-success' href="{{path('home',{'id':v.idAnnonce})}}">Réserver ce vélo</a>
+        				<input type="submit" class="btn-success " value="Réserver ce vélo">
         				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       				</div>
+              </form>
+              <!---->
     			</div>
   			</div>
 		</div>
 		{% endfor %}
 	</div>
 </div>
-
-
-
 
 {% endblock %}

@@ -9,14 +9,19 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\AnnonceRepository;
 use App\Repository\ReservationRepository;
 use App\Entity\Annonce;
+use App\Entity\Photo;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\RechercheAnnonceFormType;
+use App\Form\CreateAnnonceFormType;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 class AnnonceController extends AbstractController
 {
     /**
-    * @Route("/annonce", name= "annonce")
+    * @Route("/recherche_annonce", name= "recherche_annonce")
     */
     public function rechercheAnnonce(ReservationRepository $reservationRepo, AnnonceRepository $annonceRepo ,Request $request, EntityManagerInterface $em):Response
     {
@@ -38,11 +43,45 @@ class AnnonceController extends AbstractController
             {
                 array_push($dateReservation,$reservationRepo->findBy(["idAnnonce"=>$id]));
             }
-            return $this->render('annonce/afficheAnnonce.html.twig',['velo'=>$velo,'date'=>$dateReservation]);
+            return $this->render('annonce/afficheAnnonce.html.twig',['velo'=>$velo,'date'=>$dateReservation,'data'=>$data]);
         }
         
         return $this->render('annonce/rechercheAnnonce.html.twig',[
         	'form'=>$form->createView()]);
+    }
+
+
+    /**
+    * @Route("/poster_annonce", name= "poster_annonce")
+    */
+    public function posterAnnonce(Request $request, EntityManagerInterface $em, SluggerInterface $slugger):Response
+    {
+        $annonce=new Annonce();
+        $form=$this->createForm(CreateAnnonceFormType::class,$annonce);
+        $form->handleRequest($request);
+        if($form->isSubmitted()&&$form->isValid())
+        {
+            $imagefile=$form->get('idPhoto')->getData();
+            if ($imagefile)
+            {
+                $originalFilename = pathinfo($imagefile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = '/uploads/images/'.$safeFilename.'-'.uniqid().'.'.$imagefile->guessExtension();
+                $imagefile->move($this->getParameter('images_directory'),$newFilename);
+                $photo=new Photo();
+                $photo->setFilenamePhoto($newFilename);
+                $em->persist($photo);
+                $em->flush();
+                $annonce->addIdPhoto($photo);
+            }
+            $annonce->setDateCreationAnnonce(new \DateTime());
+            $em->persist($annonce);
+            $em->flush();
+            return $this->redirectToRoute('home');
+        }
+        
+        return $this->render('annonce/create_annonce.html.twig',[
+            'form'=>$form->createView()]);
     }
     
 }
