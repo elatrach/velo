@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends AbstractController
 {
@@ -17,7 +18,7 @@ class SecurityController extends AbstractController
     /** 
      * @Route("/inscription", name="security_registration")
      */
-    public function registration(Request $request, EntityManagerInterface $manager)
+    public function registration(Request $request, EntityManagerInterface $manager,UserPasswordEncoderInterface $encoder)
     {
         $user = new Utilisateur();
 
@@ -26,6 +27,10 @@ class SecurityController extends AbstractController
         $form->handleRequest($request); 
 
         if($form->isSubmitted() && $form->isValid()){
+            $hash = $encoder->encodepassWord($user, $user->getMdpUtilisateur());
+            $user->setMdpUtilisateur($hash);
+
+
             $manager->persist($user);
             $manager->flush();
         }
