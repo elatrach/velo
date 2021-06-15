@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout D'indisponibilité{% endblock %}
+
+{% block body %}
+	{{form_start(form)}}
+	<table>
+		{% set fday="now" | date_modify('first day of this month') | date('Y-m-d') %}
+		{% set jour=0 %}
+		{% for i in 1..4 %}
+			<tr>
+			{% for j in jour..jour+6 %}
+				<th>{{fday|date_modify('+'~j~'day')|date('D d')}}</th>
+			{% endfor %}
+			</tr>
+			<tr>
+			{% for c in jour..jour+6 %}
+				<td>{% form_widget(form) %}</td>
+			{% endfor %}
+			{% set jour=jour+7 %}
+			</tr>
+		{% endfor %}	
+	</table>
+
+	
+	{{form_end(form)}}
+{% endblock %}

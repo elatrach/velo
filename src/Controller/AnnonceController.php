@@ -14,6 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Form\RechercheAnnonceFormType;
 use App\Form\CreateAnnonceFormType;
 use App\Form\ModifAnnonceFormType;
+use App\Form\AddIndispoFormType;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -75,9 +76,17 @@ class AnnonceController extends AbstractController
             }
             $annonce->setDateCreationAnnonce(new \DateTime());
             $em->persist($annonce);
-            $em->flush();
-            $imagefile->move($this->getParameter('images_directory'),$newFilename);
-            return $this->redirectToRoute('home');
+            $form2=$this->createForm(AddIndispoFormType::class);
+            $form2->handleRequest($request);
+            if($form2->isSubmitted()&&$form2->isValid())
+            {
+                echo "ok";
+                return $this->redirectToRoute('home');
+            }
+            //$em->flush();
+            //$imagefile->move($this->getParameter('images_directory'),$newFilename);
+            return $this->render('annonce/add_indispo.html.twig',[
+            'form'=>$form2->createView()]);
         }
         
         return $this->render('annonce/create_annonce.html.twig',[
