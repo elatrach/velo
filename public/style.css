@@ -6,14 +6,16 @@ html{
 
 body{
 	width: 100%;
-	background-image: url('velo.jpg');
+	background-image: url('Background.png');
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-position: center;
+	background-size: cover;
 	position: absolute;
 	min-height:100%;
 	margin: 0 0 px; 
 	display : grid;
+	color:white;
     }
     
 p{
