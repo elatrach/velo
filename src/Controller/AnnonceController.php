@@ -68,7 +68,6 @@ class AnnonceController extends AbstractController
                 $originalFilename = pathinfo($imagefile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = '/uploads/images/'.$safeFilename.'-'.uniqid().'.'.$imagefile->guessExtension();
-                $imagefile->move($this->getParameter('images_directory'),$newFilename);
                 $photo=new Photo();
                 $photo->setFilenamePhoto($newFilename);
                 $em->persist($photo);
@@ -77,6 +76,7 @@ class AnnonceController extends AbstractController
             $annonce->setDateCreationAnnonce(new \DateTime());
             $em->persist($annonce);
             $em->flush();
+            $imagefile->move($this->getParameter('images_directory'),$newFilename);
             return $this->redirectToRoute('home');
         }
         
