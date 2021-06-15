@@ -102,12 +102,15 @@
                 Date de début de Réservation
                 <select name="date_debut">
                 {% for i in 0..30 %}
+                  <option id ="d{{i}}">{{"now"|date_modify('+'~i~'day')|date('Y-m-d')}}</option>
                   {% for liste in date %}
                     {% for objet in liste %}
                       {% if objet.idAnnonce ==(v.idAnnonce) %}
                         {% for d in objet.idCalendrierReservation %}
                           {% if d.dateReservation is same as("now"|date_modify('+'~i~'day')|date('Y-m-d')) %}
-                            <option disabled>{{"now"|date_modify('+'~i~'day')|date('Y-m-d')}}</option>
+                            <script type="text/javascript">
+                              $("option#d{{i}}").attr("disabled","disabled");
+                            </script>
                           {% endif %}
                         {% endfor %}
                       {% endif %}
@@ -115,9 +118,9 @@
                   {% endfor %}
                   {% for dates in v.idIndisponible %}
                     {% if dates.dateIndisponibilite is same as("now"|date_modify('+'~i~'day')|date('Y-m-d')) %}
-                      <option disabled>{{"now"|date_modify('+'~i~'day')|date('Y-m-d')}}</option>
-                    {% else %}
-                      <option>{{"now"|date_modify('+'~i~'day')|date('Y-m-d')}}</option>
+                      <script type="text/javascript">
+                        $("option#i").attr("disabled","disabled");
+                      </script> 
                     {% endif %}
                   {% endfor %}
                 {% endfor %}
@@ -127,12 +130,15 @@
               Date de fin de Réservation
               <select name="date_fin">
                 {% for i in 0..30 %}
+                <option id=f{{i}}>{{"now"|date_modify('+'~i~'day')|date('Y-m-d')}}</option>
                   {% for liste in date %}
                     {% for objet in liste %}
                       {% if objet.idAnnonce ==(v.idAnnonce) %}
                         {% for d in objet.idCalendrierReservation %}
                           {% if d.dateReservation is same as("now"|date_modify('+'~i~'day')|date('Y-m-d')) %}
-                            <option disabled>{{"now"|date_modify('+'~i~'day')|date('Y-m-d')}}</option>
+                            <script type="text/javascript">
+                              $("option#f{{i}}").attr("disabled","disabled");
+                            </script>
                           {% endif %}
                         {% endfor %}
                       {% endif %}
@@ -140,9 +146,9 @@
                   {% endfor %}
                   {% for dates in v.idIndisponible %}
                     {% if dates.dateIndisponibilite is same as("now"|date_modify('+'~i~'day')|date('Y-m-d')) %}
-                      <option disabled>{{"now"|date_modify('+'~i~'day')|date('Y-m-d')}}</option>
-                    {% else %}
-                      <option>{{"now"|date_modify('+'~i~'day')|date('Y-m-d')}}</option>
+                      <script type="text/javascript">
+                         $("option#f{{i}}").attr("disabled","disabled");
+                      </script> 
                     {% endif %}
                   {% endfor %}
                 {% endfor %}
