@@ -193,9 +193,13 @@ class Utilisateur implements UserInterface
 
     public function eraseCredentials(){}
     public function getSalt(){}
-    public function getPassword(){}
+    public function getPassword(){
+        return $this->mdpUtilisateur;
+    }
  
-    public function getUsername(){}
+    public function getUsername(){
+        return $this->mailUtilisateur;
+    }
     public function getRoles()
     {
         return ['ROLE_USER'];
