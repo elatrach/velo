@@ -19,8 +19,8 @@
 {% block body %}
 <div class="container">
 	<div class="row">
-    {{data|json_encode()}}
     {% for v in velo %}
+    {% if v.flagAfficheAnnonce ==1 %}
 		<div class="col-3">
 			{{v.titreAnnonce}}
 			<br/>
@@ -165,6 +165,7 @@
     			</div>
   			</div>
 		</div>
+    {% endif %}
 		{% endfor %}
 	</div>
 </div>

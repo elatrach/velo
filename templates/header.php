@@ -14,7 +14,8 @@
           		Client
         		</a>
         		<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="/recherche_annonce">Rechercher un vélo</a>
+              <a class="dropdown-item" href="/annonce">Afficher tout les vélos</a>
+              <a class="dropdown-item" href="/recherche_annonce">Rechercher un vélo</a>
         		</div>
       		</li>
       		<li class="nav-item dropdown">
@@ -23,6 +24,8 @@
         		</a>
         		<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           			<a class="dropdown-item" href="/poster_annonce">Mettre une annonce</a>
+                <a class="dropdown-item" href="/modifier_annonce">Modifier une annonce</a>
+                <a class="dropdown-item" href="/supprimer_annonce">Supprimer une annonce</a>
         		</div>
       		</li>
 		</ul>

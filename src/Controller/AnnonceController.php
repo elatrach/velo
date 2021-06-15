@@ -13,6 +13,7 @@ use App\Entity\Photo;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\RechercheAnnonceFormType;
 use App\Form\CreateAnnonceFormType;
+use App\Form\ModifAnnonceFormType;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -54,7 +55,7 @@ class AnnonceController extends AbstractController
     /**
     * @Route("/poster_annonce", name= "poster_annonce")
     */
-    public function posterAnnonce(Request $request, EntityManagerInterface $em, SluggerInterface $slugger):Response
+    public function addAnnonce(Request $request, EntityManagerInterface $em, SluggerInterface $slugger):Response
     {
         $annonce=new Annonce();
         $form=$this->createForm(CreateAnnonceFormType::class,$annonce);
@@ -83,5 +84,48 @@ class AnnonceController extends AbstractController
         return $this->render('annonce/create_annonce.html.twig',[
             'form'=>$form->createView()]);
     }
-    
+
+    /**
+    * @Route("/annonce/{id}/edit", name= "annonce_edit")
+    */
+    public function editAnnonce(Annonce $annonce, Request $request, EntityManagerInterface $em):Response
+    {
+        $form=$this->createForm(ModifAnnonceFormType::class,$annonce, ['method'=>'GET']);
+        $form->handleRequest($request);
+        if($form->isSubmitted()&&$form->isValid())
+        {
+            $em->flush();
+            return $this->redirectToRoute('home');
+        }
+        return $this->render('annonce/annonce_edit.html.twig',['annonce'=>$annonce,'form'=>$form->createView()]);
+    }
+
+    /**
+    * @Route("/annonce/{id}/delete", name= "annonce_delete")
+    */
+    public function deleteAnnonce(Annonce $annonce, Request $request, EntityManagerInterface $em):Response
+    {
+        $annonce->setFlagAfficheAnnonce(0);
+        $em->flush();
+        return $this->redirectToRoute('home');
+    }
+
+    /**
+    * @Route("/annonce", name= "all_annonce")
+    */
+    public function allAnnonce(AnnonceRepository $annonceRepo, ReservationRepository $reservationRepo): Response
+    {
+        $velo=$annonceRepo->findAll();
+        $idData=array();
+        foreach ($velo as $v)
+        {
+            array_push($idData, $v->getIdAnnonce());
+        }
+        $dateReservation=array();
+        foreach($idData as $id)
+        {
+            array_push($dateReservation,$reservationRepo->findBy(["idAnnonce"=>$id]));
+        }
+        return $this->render('annonce/afficheAnnonce.html.twig',['velo'=>$velo,'date'=>$dateReservation]);
+    }
 }
