@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Utilisateur
@@ -60,6 +61,7 @@ class Utilisateur
      * @var string|null
      *
      * @ORM\Column(name="mdp_utilisateur", type="string", length=255, nullable=true)
+     * @Assert\Length(min="8", minMessage="Votre de passe doit faire minimum 8 caractères")
      */
     private $mdpUtilisateur;
 
