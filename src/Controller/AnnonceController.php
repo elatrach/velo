@@ -72,7 +72,6 @@ class AnnonceController extends AbstractController
                 $photo=new Photo();
                 $photo->setFilenamePhoto($newFilename);
                 $em->persist($photo);
-                $em->flush();
                 $annonce->addIdPhoto($photo);
             }
             $annonce->setDateCreationAnnonce(new \DateTime());
