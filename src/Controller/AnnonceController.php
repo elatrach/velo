@@ -76,17 +76,9 @@ class AnnonceController extends AbstractController
             }
             $annonce->setDateCreationAnnonce(new \DateTime());
             $em->persist($annonce);
-            $form2=$this->createForm(AddIndispoFormType::class);
-            $form2->handleRequest($request);
-            if($form2->isSubmitted()&&$form2->isValid())
-            {
-                echo "ok";
-                return $this->redirectToRoute('home');
-            }
-            //$em->flush();
-            //$imagefile->move($this->getParameter('images_directory'),$newFilename);
-            return $this->render('annonce/add_indispo.html.twig',[
-            'form'=>$form2->createView()]);
+            $em->flush();
+            $imagefile->move($this->getParameter('images_directory'),$newFilename);
+            return $this->redirectToRoute('home');
         }
         
         return $this->render('annonce/create_annonce.html.twig',[
