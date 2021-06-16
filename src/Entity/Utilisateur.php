@@ -198,7 +198,7 @@ class Utilisateur implements UserInterface
     }
  
     public function getUsername(){
-        return $this->mailUtilisateur;
+        return $this->nomUtilisateur;
     }
     public function getRoles()
     {

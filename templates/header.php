@@ -1,3 +1,203 @@
+<header class="header-area">
+        <div class="main-header d-none d-lg-block">
+            <!-- header top start -->
+            <div class="header-top theme-bg">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-sm-4">
+                            <div class="header-top-left text-center text-sm-left">
+                                Nous appeler :<a href="tel:+968573979894"> 0673100901</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="login-register text-center">
+								{%  if not app.user %}
+								<li class="nav item">
+									<a class="nav-link" href="{{ path('security_login') }}"> Connexion/Inscription</a>
+								</li>
+								{% else %}
+								<li class="nav item">
+									<a class="nav-link" href="{{ path('security_logout') }}"> Deconnexion</a>
+								</li>
+								{% endif %} 
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="header-social-link text-center text-sm-right">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header top start -->
+
+            <!-- main menu start -->
+            <div class="main-menu-wrapper sticky header-transparent">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3">
+                            <!-- logo area start -->
+                            <div class="brand-logo">
+                                <a href="index.html">
+                                    <img src="{{ asset('veloLogo.png') }}" alt="brand logo">
+                                </a>
+                            </div>
+                            <!-- logo area end -->
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="main-menu-inner">
+                                <!-- main menu navbar start -->
+                                <nav class="main-menu">
+                                    <ul>
+                                        <li class="active"><a href="/">Home</a>
+                                        </li>
+                                        <li><a href="service.html">Mes annonces</a>
+                                            <ul class="dropdown">
+                                                <li><a href="/modifier_annonce">Modifier une annonce</a></li>
+                                                <li><a href="/supprimer_annonce">Supprimer une annonce</a></li>
+												<li><a href="/poster_annonce">Mettre une annonce</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="team.html">Rechercher un vélo</a>
+                                            <ul class="dropdown">
+												<li><a href="/annonce">Afficher tout les vélos</a></li>
+                                                <li><a href="/recherche_annonce">Rechercher un vélo</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                    </ul>
+                                </nav>
+                                <!-- main menu navbar end -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- main menu end -->
+        </div>
+
+        <!-- mobile header start -->
+        <!-- mobile header start -->
+        <div class="mobile-header d-lg-none d-md-block sticky">
+            <!--mobile header top start -->
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-12">
+                        <div class="mobile-main-header">
+                            <div class="mobile-logo">
+                                <a href="index.html">
+                                    <img src="assets/img/logo/logo.png" alt="Brand Logo">
+                                </a>
+                            </div>
+                            <div class="mobile-menu-toggler">
+                                <button class="mobile-menu-btn">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- mobile header top start -->
+        </div>
+        <!-- mobile header end -->
+        <!-- mobile header end -->
+
+        <!-- offcanvas mobile menu start -->
+        <!-- off-canvas menu start -->
+        <aside class="off-canvas-wrapper">
+            <div class="off-canvas-overlay"></div>
+            <div class="off-canvas-inner-content">
+                <div class="btn-close-off-canvas">
+                    <i class="fa fa-close"></i>
+                </div>
+
+                <div class="off-canvas-inner">
+                    <!-- search box start -->
+                    <div class="search-box-offcanvas">
+                        <form>
+                            <input type="text" placeholder="Search Here...">
+                            <button class="search-btn"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                    <!-- search box end -->
+
+                    <!-- mobile menu start -->
+                    <div class="mobile-navigation">
+                        <!-- mobile menu navigation start -->
+                        <nav>
+                            <ul class="mobile-menu">
+                                <li class="menu-item-has-children"><a href="index.html">Home</a>
+                                    <ul class="dropdown">
+                                        <li><a href="index.html"></a></li>
+                                        <li><a href="index-2.html"></a></li>
+                                    </ul>
+                                </li>
+                               
+                                <li class="menu-item-has-children"><a href="service.html">Mes annonce</a>
+                                    <ul class="dropdown">
+										<li><a href="/modifier_annonce">Modifier une annonce</a></li>
+										<li><a href="/supprimer_annonce">Supprimer une annonce</a></li>
+										<li><a href="/poster_annonce">Mettre une annonce</a></li>
+                                    </ul>
+                                </li>
+                               
+                                <li class="menu-item-has-children"><a href="#">Rechercher un vélo</a>
+                                    <ul class="dropdown">
+                                        <li><a href="/annonce">Afficher tout les vélos</a></li>
+                                        <li><a href="/recherche_annonce">Rechercher un vélo</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </nav>
+                        <!-- mobile menu navigation end -->
+                    </div>
+                    <!-- mobile menu end -->
+
+                    <!-- offcanvas widget area start -->
+                    <div class="offcanvas-widget-area">
+                        <div class="off-canvas-contact-widget">
+                            <ul>
+                                <li><i class="fa fa-mobile"></i>
+                                    <a href="#">0123456789</a>
+                                </li>
+                                <li><i class="fa fa-envelope-o"></i>
+                                    <a href="#">youssef@leboss.com</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="off-canvas-social-widget">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        </div>
+                    </div>
+                    <!-- offcanvas widget area end -->
+                </div>
+            </div>
+        </aside>
+        <!-- off-canvas menu end -->
+        <!-- offcanvas mobile menu end -->
+
+    </header>
+
+
+
+
+
+
+
+
+<!--
 <header>
 	<div class="container-fluid">
 		<div class="row">
@@ -40,3 +240,4 @@
 		</ul>
 	</div>
 </header>
+-->
