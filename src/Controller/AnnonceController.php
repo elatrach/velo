@@ -128,4 +128,5 @@ class AnnonceController extends AbstractController
         }
         return $this->render('annonce/afficheAnnonce.html.twig',['velo'=>$velo,'date'=>$dateReservation]);
     }
+
 }
