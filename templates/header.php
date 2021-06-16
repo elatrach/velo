@@ -28,6 +28,15 @@
                 <a class="dropdown-item" href="/supprimer_annonce">Supprimer une annonce</a>
         		</div>
       		</li>
+			  {%  if not app.user %}
+			<li class="nav item">
+				<a class="nav-link" href="{{ path('security_login') }}"> connexion</a>
+			</li>
+			{% else %}
+			<li class="nav item">
+				<a class="nav-link" href="{{ path('security_logout') }}"> deconnexion</a>
+			</li>
+			{% endif %}
 		</ul>
 	</div>
 </header>
