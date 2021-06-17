@@ -15,7 +15,7 @@ class Cible
     /**
      * @var int
      *
-     * @ORM\Column(name="id_cible", type="integer", nullable=false)
+     * @ORM\Column(name="id_public", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -24,7 +24,7 @@ class Cible
     /**
      * @var string|null
      *
-     * @ORM\Column(name="libelle_cible", type="string", length=45, nullable=true)
+     * @ORM\Column(name="libelle_public", type="string", length=45, nullable=true)
      */
     private $libelleCible;
 

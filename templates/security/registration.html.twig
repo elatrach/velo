@@ -2,21 +2,71 @@
 
 {% block body %}
 
-<h1>Inscription sur le site</h1>
 
 
-{{ form_start(form) }}
-{{ form_row(form.nomUtilisateur,{'label': 'Votre nom','attr':{'placeholder':'Nom'}}) }}
 
-{{ form_row(form.prenomUtilisateur,{'label': 'Votre prenom','attr':{'placeholder':'Prénom'}}) }}
-{{ form_row(form.dateDeNaissanceUtilisateur,{'label': 'Votre date de naissance'}) }}
-{{ form_row(form.adresseUtilisateur,{'label': 'Votre adresse','attr':{'placeholder':'Adresse'}}) }}
-{{ form_row(form.mailUtilisateur,{'label': 'Votre mail','attr':{'placeholder':'mail'}}) }}
-{{ form_row(form.mdpUtilisateur,{'label': 'Votre mots de passe','attr':{'placeholder':'mot de passe'}}) }}
-{{ form_row(form.portableUtilisateur,{'label': 'Votre numero','attr':{'placeholder':'numero'}}) }}
-{{ form_row(form.typeUtilisateur) }}
 
-<button type="submit" name="" id="" class="btn btn-primary btn-lg btn-block"> Inscription </button>
-{{ form_end(form) }}
+
+<main>
+
+    <!-- breadcrumb section start -->
+    <div class="breadcrumb-area bg-img" data-bg="assets/img/banner/page-banner.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-wrap">
+                        <nav aria-label="breadcrumb">
+                            <h2 class="breadcrumb-title">Inscription</h2>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb section end -->
+
+    <!-- team section start -->
+    <section class="team-wrapper team-wrapper--style_3 section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 order-2 order-lg-1">
+                    <div class="contact-message">
+                        {{ form_start(form) }}
+                            {{ form_row(form.nomUtilisateur,{'label': 'Votre nom','attr':{'placeholder':'Nom'}}) }}
+
+                            {{ form_row(form.prenomUtilisateur,{'label': 'Votre prenom','attr':{'placeholder':'Prénom'}}) }}
+                            {{ form_row(form.dateDeNaissanceUtilisateur,{'label': 'Votre date de naissance'}) }}
+                            {{ form_row(form.adresseUtilisateur,{'label': 'Votre adresse','attr':{'placeholder':'Adresse'}}) }}
+                            {{ form_row(form.mailUtilisateur,{'label': 'Votre mail','attr':{'placeholder':'mail'}}) }}
+                            {{ form_row(form.mdpUtilisateur,{'label': 'Votre mots de passe','attr':{'placeholder':'mot de passe'}}) }}
+                            {{ form_row(form.portableUtilisateur,{'label': 'Votre numero','attr':{'placeholder':'numero'}}) }}
+                            {{ form_row(form.typeUtilisateur) }}
+                            <div class="contact-btn ">
+                                <button type="submit" class="btn btn-all"> Inscription !</button>
+                            </div>
+                        
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 {% endblock %}
