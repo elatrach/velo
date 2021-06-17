@@ -2,7 +2,81 @@
 
 {% block body %}
 
-<h1>Connexion</h1>
+
+<main>
+
+    <!-- breadcrumb section start -->
+    <div class="breadcrumb-area bg-img" data-bg="assets/img/banner/page-banner.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-wrap">
+                        <nav aria-label="breadcrumb">
+                            <h2 class="breadcrumb-title">Connexion</h2>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb section end -->
+
+    <!-- team section start -->
+    <section class="team-wrapper team-wrapper--style_3 section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 order-2 order-lg-1">
+                    <div class="contact-message">
+                        <form id="contact-form" action="{{ path('security_login') }}" method="POST" class="contact-form">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <input name="_username" placeholder="Adresse email" type="text" class="form-controle" required >
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <input name="_password" placeholder="Mot de passe" type="text" class="form-controle" required >
+                                </div>
+                                <div class="contact-btn ">
+                                    <button type="submit" class="btn btn-all"> Connexion !</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+
+
+
+<!--
+            <form action="{{ path('security_login') }}" method="POST">
+                <div class="form-group" >
+                    <input name="_username" placeholder="Adresse email" type="text" class="form-controle" required >
+                </div>
+                <div class="form-group">
+                    <input name="_password" placeholder="Mot de passe" type="text" class="form-controle" required >
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success"> Connexion !</button>
+                </div>
+            </form>
+             -->
+        
+    
+
+<!-- Scroll to top start -->
+<div class="scroll-top not-visible">
+    <i class="fa fa-angle-up"></i>
+</div>
+<!-- Scroll to Top End -->
+
+
+<!--
+<main>
+    <h1>Connexion</h1>
 <form action="{{ path('security_login') }}" method="POST">
     <div class="form-group" >
         <input name="_username" placeholder="Adresse email" type="text" class="form-controle" required >
@@ -14,6 +88,9 @@
         <button type="submit" class="btn btn-success"> Connexion !</button>
     </div>
 </form>
+
+</main>-->
+
 
 
 
